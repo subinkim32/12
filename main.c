@@ -235,10 +235,25 @@ int main(int argc, char *argv[]) {
 		{
 			// move the shark
 			int shark_pos = board_stepShark();
-			
-			//printf(); the shark moved
+			printf("Shark moved to %d\n", shark_pos);
 			checkDie();
 		}
+		
+		// Conditions that the game ends
+		// When the number of end or die state reaches that of players,
+			//we wil exit the loop.
+		
+		int stopCnt = 0;
+		for (i=0; i<N_PLAYER; i++)
+		{
+			if (player_status[i] == PLAYERSTATUS_LIVE)
+				continue;
+			else
+				stopCnt++;
+		}
+		
+		if (stopCnt == N_PLAYER)
+			break;
 	} while(!game_end);
 		
 	// 3. calculate, print winner
@@ -253,10 +268,9 @@ int main(int argc, char *argv[]) {
 	}
 	else
 	{
-		printf("%s reached to the end! (coin: %d)", player_name[winnerIndex], player_coin[winnerIndex]);
-		printf("%d player(s) is/are alive! Winner is %s", alivePlayers, player_name[winnerIndex]);
+		printf("%s reached to the end! (coin: %d)\n", player_name[winnerIndex], player_coin[winnerIndex]);
+		printf("%d player(s) is/are alive! Winner is %s\n", alivePlayers, player_name[winnerIndex]);
 	}
-	
 	
 	
 	// 4. ending
